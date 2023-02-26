@@ -199,7 +199,11 @@ def app():
                 print('Book deleted!')
                 time.sleep(1.5)
         elif choice == '4':
-            pass
+            oldest_book = session.query(Book).order_by(Book.published_date).first()
+            newest_book = session.query(Book).order_by(Book.published_date.desc()).first()
+            total_books = session.query(Book).count()
+            python_books = session.query(Book).filter(Book.title.like('%Python%')).count()
+            print(python_books)
         else:
             print('GOODBYE')
             app_running = False
